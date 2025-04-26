@@ -57,11 +57,11 @@ const Hero: React.FC = () => {
                 </Link>
               </div>
               
-              <div className="flex items-center space-x-8 mt-12">
+              {/* <div className="flex items-center space-x-8 mt-12">
                 <img src="https://images.pexels.com/photos/11035481/pexels-photo-11035481.jpeg?auto=compress&cs=tinysrgb&w=100" alt="Company 1" className="h-10 opacity-70 grayscale hover:grayscale-0 hover:opacity-100 transition-all" />
                 <img src="https://images.pexels.com/photos/11035471/pexels-photo-11035471.jpeg?auto=compress&cs=tinysrgb&w=100" alt="Company 2" className="h-10 opacity-70 grayscale hover:grayscale-0 hover:opacity-100 transition-all" />
                 <img src="https://images.pexels.com/photos/11035380/pexels-photo-11035380.jpeg?auto=compress&cs=tinysrgb&w=100" alt="Company 3" className="h-10 opacity-70 grayscale hover:grayscale-0 hover:opacity-100 transition-all" />
-              </div>
+              </div> */}
             </motion.div>
           </div>
           
