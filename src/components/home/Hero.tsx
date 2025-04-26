@@ -73,6 +73,14 @@ const Hero: React.FC = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-600/20 to-purple-600/20 backdrop-blur-sm border border-gray-700/50 flex items-center justify-center"
+                style={{
+                  boxShadow: `
+                    0 0 25px 5px rgba(79, 70, 229, 0.3),
+                    0 0 50px 10px rgba(124, 58, 237, 0.2),
+                    inset 0 0 20px rgba(139, 92, 246, 0.3)
+                  `,
+                  animation: 'pulse 3s infinite alternate'
+                }}
               >
                 <div className="text-center">
                   <div className="text-5xl font-bold gradient-text mb-2">Gritfy Technologies</div>
