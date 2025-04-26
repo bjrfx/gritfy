@@ -1,7 +1,20 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, Brain, Cloud, Database, Code, Shield } from 'lucide-react';
+import { 
+  ArrowRight, 
+  Brain, 
+  Cloud, 
+  Database, 
+  Code, 
+  Shield,
+  Cpu,
+  Network,
+  Globe,
+  LineChart,
+  Server,
+  Lock
+} from 'lucide-react';
 
 const Hero: React.FC = () => {
   const iconRef = useRef<HTMLDivElement>(null);
@@ -142,7 +155,7 @@ const Hero: React.FC = () => {
                 </div>
               </motion.div>
               
-              {/* Floating icons - removed fixed positioning classes as they'll be positioned by JS */}
+              {/* Existing floating icons */}
               <motion.div 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -191,6 +204,67 @@ const Hero: React.FC = () => {
                 data-speed="3.5"
               >
                 <Shield className="text-pink-400 h-7 w-7" />
+              </motion.div>
+              
+              {/* Additional floating icons */}
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 1.5 }}
+                className="floating-icon w-13 h-13 bg-red-900/30 backdrop-blur-md rounded-lg flex items-center justify-center border border-red-700/50 shadow-lg absolute"
+                data-speed="2.2"
+              >
+                <Cpu className="text-red-400 h-7 w-7" />
+              </motion.div>
+              
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 1.7 }}
+                className="floating-icon w-15 h-15 bg-cyan-900/30 backdrop-blur-md rounded-lg flex items-center justify-center border border-cyan-700/50 shadow-lg absolute"
+                data-speed="3.2"
+              >
+                <Network className="text-cyan-400 h-8 w-8" />
+              </motion.div>
+              
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 1.9 }}
+                className="floating-icon w-13 h-13 bg-emerald-900/30 backdrop-blur-md rounded-lg flex items-center justify-center border border-emerald-700/50 shadow-lg absolute"
+                data-speed="2.7"
+              >
+                <Globe className="text-emerald-400 h-7 w-7" />
+              </motion.div>
+              
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 2.1 }}
+                className="floating-icon w-12 h-12 bg-orange-900/30 backdrop-blur-md rounded-lg flex items-center justify-center border border-orange-700/50 shadow-lg absolute"
+                data-speed="1.8"
+              >
+                <LineChart className="text-orange-400 h-7 w-7" />
+              </motion.div>
+              
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 2.3 }}
+                className="floating-icon w-14 h-14 bg-indigo-900/30 backdrop-blur-md rounded-lg flex items-center justify-center border border-indigo-700/50 shadow-lg absolute"
+                data-speed="2.9"
+              >
+                <Server className="text-indigo-400 h-8 w-8" />
+              </motion.div>
+              
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1, delay: 2.5 }}
+                className="floating-icon w-11 h-11 bg-teal-900/30 backdrop-blur-md rounded-lg flex items-center justify-center border border-teal-700/50 shadow-lg absolute"
+                data-speed="3.8"
+              >
+                <Lock className="text-teal-400 h-6 w-6" />
               </motion.div>
             </div>
           </div>
