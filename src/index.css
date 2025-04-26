@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Remove any custom cursor styles that might be conflicting */
+
 @layer base {
   html {
     @apply scroll-smooth;
@@ -65,17 +67,6 @@
   .gradient-text {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500;
   }
-}
-
-/* Custom cursor styles */
-.cursor-dot {
-  @apply fixed top-0 left-0 w-6 h-6 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full pointer-events-none z-50 -translate-x-1/2 -translate-y-1/2 opacity-70 mix-blend-screen;
-  filter: blur(4px);
-}
-
-.cursor-outline {
-  @apply fixed top-0 left-0 w-10 h-10 border-2 border-white rounded-full pointer-events-none z-50 -translate-x-1/2 -translate-y-1/2 opacity-30;
-  transition: transform 0.1s ease;
 }
 
 /* Animated background */

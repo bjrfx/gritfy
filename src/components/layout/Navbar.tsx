@@ -118,7 +118,7 @@ const Navbar: React.FC = () => {
               <Link to="/" className="flex items-center">
                 <Logo />
                 <span className="ml-2 text-xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
-                  TechNova
+                Gritfy
                 </span>
               </Link>
             </div>

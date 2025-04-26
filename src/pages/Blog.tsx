@@ -18,7 +18,7 @@ interface BlogPost {
 
 const Blog: React.FC = () => {
   useEffect(() => {
-    document.title = "Blog - TechNova Solutions";
+    document.title = "Blog - Gritfy Technologies Solutions";
   }, []);
 
   const featuredPosts: BlogPost[] = [
@@ -150,7 +150,7 @@ const Blog: React.FC = () => {
             className="text-center mb-16"
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              TechNova <span className="gradient-text">Insights</span>
+            Gritfy Technologies <span className="gradient-text">Insights</span>
             </h1>
             <p className="max-w-2xl mx-auto text-gray-300 text-lg">
               Expert perspectives on AI, cloud technology, and digital transformation 

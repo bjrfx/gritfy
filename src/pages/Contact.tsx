@@ -4,7 +4,7 @@ import { Mail, Phone, MapPin, Clock, Send } from 'lucide-react';
 
 const Contact: React.FC = () => {
   useEffect(() => {
-    document.title = "Contact TechNova Solutions";
+    document.title = "Contact Gritfy Technologies";
   }, []);
 
   const [formState, setFormState] = useState({
@@ -45,8 +45,8 @@ const Contact: React.FC = () => {
     {
       icon: <Mail className="w-6 h-6 text-primary-400" />,
       title: "Email Us",
-      details: "info@technova.com",
-      action: "mailto:info@technova.com",
+      details: "info@gritfytechnologies.com",
+      action: "mailto:info@gritfytechnologies.com",
     },
     {
       icon: <Phone className="w-6 h-6 text-primary-400" />,
@@ -309,7 +309,7 @@ const Contact: React.FC = () => {
         <div className="glass-card p-6 overflow-hidden relative">
           <div className="aspect-[16/5] rounded-lg overflow-hidden">
             <iframe 
-              title="TechNova Office Location" 
+              title="Gritfy Technologies Office Location" 
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.6634097818997!2d-122.40069688427677!3d37.78615791969231!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085807c1f0da00d%3A0xfa162356a28d5e2c!2sSan%20Francisco%2C%20CA%2094107!5e0!3m2!1sen!2sus!4v1654523634156!5m2!1sen!2sus" 
               width="100%" 
               height="100%" 

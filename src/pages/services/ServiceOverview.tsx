@@ -299,7 +299,7 @@ const ServiceOverview: React.FC = () => {
   const service = serviceCategories[category || ''] || defaultService;
   
   useEffect(() => {
-    document.title = `${service.title} - TechNova Solutions`;
+    document.title = `${service.title} - Gritfy Technologies`;
   }, [service.title]);
 
   return (
@@ -337,7 +337,7 @@ const ServiceOverview: React.FC = () => {
             >
               <h2 className="text-2xl font-bold mb-6">Our Approach</h2>
               <p className="text-gray-300 mb-8">
-                At TechNova, we deliver exceptional {service.title} through a proven, client-focused methodology that ensures 
+                At Gritfy Technologies, we deliver exceptional {service.title} through a proven, client-focused methodology that ensures 
                 tailored solutions aligned with your business objectives. Our approach combines technical expertise, 
                 industry knowledge, and agile delivery to drive measurable results.
               </p>

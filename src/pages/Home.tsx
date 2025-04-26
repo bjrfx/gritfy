@@ -8,7 +8,7 @@ import { Clock, Award, Users, Zap } from 'lucide-react';
 
 const Home: React.FC = () => {
   useEffect(() => {
-    document.title = "TechNova Solutions - Enterprise AI & Cloud Innovation";
+    document.title = "Gritfy Technologies - Enterprise AI & Cloud Innovation";
   }, []);
 
   const stats = [
@@ -102,7 +102,7 @@ const Home: React.FC = () => {
                   Driving <span className="gradient-text">Innovation</span> Through Technology
                 </h2>
                 <p className="text-gray-300 mb-6">
-                  At TechNova, we believe in harnessing the power of cutting-edge technology to solve complex 
+                  At Gritfy Technologies, we believe in harnessing the power of cutting-edge technology to solve complex 
                   business challenges. Our team of experts works closely with you to understand your unique needs 
                   and deliver tailored solutions that drive growth.
                 </p>

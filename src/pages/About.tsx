@@ -5,7 +5,7 @@ import { Users, Award, Target, Clock } from 'lucide-react';
 
 const About: React.FC = () => {
   useEffect(() => {
-    document.title = "About TechNova Solutions";
+    document.title = "About Gritfy Technologies";
   }, []);
 
   const values = [
@@ -36,7 +36,7 @@ const About: React.FC = () => {
       name: "Sarah Johnson",
       role: "CEO & Founder",
       image: "https://images.pexels.com/photos/5393594/pexels-photo-5393594.jpeg?auto=compress&cs=tinysrgb&w=600",
-      bio: "With over 15 years of experience in technology leadership, Sarah leads TechNova's strategic vision."
+      bio: "With over 15 years of experience in technology leadership, Sarah leads Gritfy Technologies's strategic vision."
     },
     {
       name: "Michael Chen",
@@ -69,7 +69,7 @@ const About: React.FC = () => {
             className="text-center mb-16"
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              About <span className="gradient-text">TechNova Solutions</span>
+              About <span className="gradient-text">Gritfy Technologies</span>
             </h1>
             <p className="max-w-2xl mx-auto text-gray-300 text-lg">
               Building the future through innovative technology solutions for forward-thinking enterprises.
@@ -87,7 +87,7 @@ const About: React.FC = () => {
                 <div className="aspect-square rounded-2xl overflow-hidden glass-card p-2">
                   <img 
                     src="https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&cs=tinysrgb&w=1200" 
-                    alt="TechNova Team" 
+                    alt="Gritfy Technologies Team" 
                     className="w-full h-full object-cover rounded-xl"
                   />
                 </div>
@@ -106,7 +106,7 @@ const About: React.FC = () => {
             >
               <h2 className="text-3xl font-bold mb-6">Our Story</h2>
               <p className="text-gray-300 mb-6">
-                Founded in 2014, TechNova Solutions began with a simple yet powerful vision: to help businesses 
+                Founded in 2014, Gritfy Technologies Solutions began with a simple yet powerful vision: to help businesses 
                 harness the transformative power of technology. What started as a small team of passionate 
                 technologists has grown into a global enterprise solutions provider trusted by companies across 
                 industries.
@@ -117,7 +117,7 @@ const About: React.FC = () => {
                 meet the changing needs of the digital landscape.
               </p>
               <p className="text-gray-300">
-                Today, TechNova stands at the forefront of AI development, cloud transformation, and digital 
+                Today, Gritfy Technologies stands at the forefront of AI development, cloud transformation, and digital 
                 innovation, helping enterprises navigate complex technological challenges and unlock new 
                 opportunities for growth.
               </p>
@@ -128,7 +128,7 @@ const About: React.FC = () => {
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">Our Core Values</h2>
               <p className="max-w-2xl mx-auto text-gray-400">
-                The principles that guide everything we do at TechNova Solutions
+                The principles that guide everything we do at Gritfy Technologies
               </p>
             </div>
             
@@ -155,7 +155,7 @@ const About: React.FC = () => {
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">Leadership Team</h2>
               <p className="max-w-2xl mx-auto text-gray-400">
-                Meet the experts leading TechNova's innovation and growth
+                Meet the experts leading Gritfy Technologies's innovation and growth
               </p>
             </div>
             

@@ -75,7 +75,7 @@ const Hero: React.FC = () => {
                 className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-600/20 to-purple-600/20 backdrop-blur-sm border border-gray-700/50 flex items-center justify-center"
               >
                 <div className="text-center">
-                  <div className="text-5xl font-bold gradient-text mb-2">TechNova</div>
+                  <div className="text-5xl font-bold gradient-text mb-2">Gritfy Technologies</div>
                   <div className="text-gray-400">Enterprise Solutions</div>
                 </div>
               </motion.div>

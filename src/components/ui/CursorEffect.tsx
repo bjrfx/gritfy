@@ -7,6 +7,20 @@ const CursorEffect: React.FC = () => {
   const [linkHovered, setLinkHovered] = useState(false);
 
   useEffect(() => {
+    // Create and inject a stylesheet specifically for cursor handling
+    const styleElement = document.createElement('style');
+    styleElement.setAttribute('id', 'cursor-style-overrides');
+    styleElement.innerHTML = `
+      *, *::before, *::after {
+        cursor: none !important;
+      }
+
+      body, html, a, button, input, [role="button"], .nav-link, .btn {
+        cursor: none !important;
+      }
+    `;
+    document.head.appendChild(styleElement);
+
     const updatePosition = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
       setHidden(false);
@@ -24,13 +38,21 @@ const CursorEffect: React.FC = () => {
     window.addEventListener('mouseleave', () => setHidden(true));
     window.addEventListener('mouseenter', () => setHidden(false));
 
-    // Select all clickable elements for hover effect
-    const clickableElements = document.querySelectorAll('a, button, input, [role="button"]');
+    // Update link hover state handling
+    const setupHoverListeners = () => {
+      const clickableElements = document.querySelectorAll('a, button, input, [role="button"], .nav-link, .btn, nav *');
+      
+      clickableElements.forEach(el => {
+        el.addEventListener('mouseenter', handleLinkHoverStart);
+        el.addEventListener('mouseleave', handleLinkHoverEnd);
+      });
+    };
+
+    // Initial setup
+    setupHoverListeners();
     
-    clickableElements.forEach(el => {
-      el.addEventListener('mouseenter', handleLinkHoverStart);
-      el.addEventListener('mouseleave', handleLinkHoverEnd);
-    });
+    // Refresh event listeners periodically
+    const intervalId = setInterval(setupHoverListeners, 1000);
 
     return () => {
       window.removeEventListener('mousemove', updatePosition);
@@ -39,6 +61,14 @@ const CursorEffect: React.FC = () => {
       window.removeEventListener('mouseleave', () => setHidden(true));
       window.removeEventListener('mouseenter', () => setHidden(false));
       
+      clearInterval(intervalId);
+      
+      if (document.getElementById('cursor-style-overrides')) {
+        document.head.removeChild(styleElement);
+      }
+      
+      // Clean up event listeners
+      const clickableElements = document.querySelectorAll('a, button, input, [role="button"], .nav-link, .btn, nav *');
       clickableElements.forEach(el => {
         el.removeEventListener('mouseenter', handleLinkHoverStart);
         el.removeEventListener('mouseleave', handleLinkHoverEnd);
@@ -49,19 +79,39 @@ const CursorEffect: React.FC = () => {
   return (
     <>
       <div 
-        className={`cursor-dot ${hidden ? 'opacity-0' : 'opacity-70'} ${clicked ? 'scale-50' : ''}`}
+        className="cursor-dot"
         style={{ 
+          position: 'fixed',
           left: `${position.x}px`, 
           top: `${position.y}px`,
-          transform: `translate(-50%, -50%) scale(${linkHovered ? 2 : 1})`
+          width: '6px',
+          height: '6px',
+          backgroundColor: '#8B5CF6',
+          borderRadius: '50%',
+          pointerEvents: 'none',
+          opacity: hidden ? 0 : 0.7,
+          mixBlendMode: 'screen',
+          filter: 'blur(4px)',
+          transform: `translate(-50%, -50%) scale(${clicked ? 0.5 : linkHovered ? 2 : 1})`,
+          zIndex: 99999,
+          transition: 'transform 0.1s ease, opacity 0.2s ease'
         }}
       />
       <div
-        className={`cursor-outline ${hidden ? 'opacity-0' : 'opacity-40'} ${clicked ? 'scale-90' : ''}`}
+        className="cursor-outline"
         style={{ 
+          position: 'fixed',
           left: `${position.x}px`, 
           top: `${position.y}px`,
-          transform: `translate(-50%, -50%) scale(${linkHovered ? 1.5 : 1})` 
+          width: '30px',
+          height: '30px',
+          border: '2px solid rgba(255, 255, 255, 0.5)',
+          borderRadius: '50%',
+          pointerEvents: 'none',
+          opacity: hidden ? 0 : 0.4,
+          transform: `translate(-50%, -50%) scale(${clicked ? 0.9 : linkHovered ? 1.5 : 1})`,
+          zIndex: 99999,
+          transition: 'transform 0.15s ease, opacity 0.2s ease'
         }}
       />
     </>

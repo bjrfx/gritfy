@@ -5,7 +5,7 @@ import { Home, Search, HelpCircle, ArrowLeft } from 'lucide-react';
 
 const NotFound: React.FC = () => {
   useEffect(() => {
-    document.title = "Page Not Found - TechNova Solutions";
+    document.title = "Page Not Found - Gritfy Technologies";
   }, []);
 
   return (
