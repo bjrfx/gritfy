@@ -5,26 +5,80 @@ import { ArrowRight, Brain, Cloud, Database, Code, Shield } from 'lucide-react';
 
 const Hero: React.FC = () => {
   const iconRef = useRef<HTMLDivElement>(null);
+  const animationRef = useRef<number | null>(null);
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!iconRef.current) return;
+    // Initialize positions and start the animation
+    const container = iconRef.current;
+    if (!container) return;
+    
+    const containerRect = container.querySelector('.circle-container')?.getBoundingClientRect();
+    if (!containerRect) return;
+
+    const icons = container.querySelectorAll('.floating-icon');
+    const centerX = containerRect.width / 2;
+    const centerY = containerRect.height / 2;
+    const radius = Math.min(centerX, centerY) * 0.8;
+    
+    // Initialize random positions, speeds and angles for each icon
+    icons.forEach((icon: Element) => {
+      const iconEl = icon as HTMLElement;
+      iconEl.dataset.angle = (Math.random() * Math.PI * 2).toString();
+      iconEl.dataset.orbitSpeed = (0.0005 + Math.random() * 0.001).toString();
+      iconEl.dataset.orbitRadius = (radius * (0.7 + Math.random() * 0.3)).toString();
+      iconEl.dataset.waveAmplitude = (5 + Math.random() * 10).toString();
+      iconEl.dataset.waveFrequency = (0.001 + Math.random() * 0.002).toString();
+    });
+    
+    // Animation function
+    const animate = () => {
+      if (!container) return;
       
-      const icons = iconRef.current.querySelectorAll('.floating-icon');
+      const containerRect = container.querySelector('.circle-container')?.getBoundingClientRect();
+      if (!containerRect) return;
+      
+      const centerX = containerRect.width / 2;
+      const centerY = containerRect.height / 2;
       
       icons.forEach((icon: Element) => {
-        const speed = parseFloat((icon as HTMLElement).dataset.speed || '1');
-        const x = (window.innerWidth - e.pageX * speed) / 100;
-        const y = (window.innerHeight - e.pageY * speed) / 100;
+        const iconEl = icon as HTMLElement;
         
-        (icon as HTMLElement).style.transform = `translateX(${x}px) translateY(${y}px)`;
+        // Update angle for orbit
+        let angle = parseFloat(iconEl.dataset.angle || '0');
+        const orbitSpeed = parseFloat(iconEl.dataset.orbitSpeed || '0.001');
+        const orbitRadius = parseFloat(iconEl.dataset.orbitRadius || '100');
+        const waveAmplitude = parseFloat(iconEl.dataset.waveAmplitude || '5');
+        const waveFrequency = parseFloat(iconEl.dataset.waveFrequency || '0.001');
+        
+        angle += orbitSpeed;
+        iconEl.dataset.angle = angle.toString();
+        
+        // Calculate position with some wave motion
+        const time = Date.now();
+        const waveX = Math.sin(time * waveFrequency) * waveAmplitude;
+        const waveY = Math.cos(time * (waveFrequency * 1.2)) * waveAmplitude;
+        
+        const x = centerX + Math.cos(angle) * orbitRadius + waveX;
+        const y = centerY + Math.sin(angle) * orbitRadius + waveY;
+        
+        // Set position while accounting for the icon's size
+        const offsetX = iconEl.offsetWidth / 2;
+        const offsetY = iconEl.offsetHeight / 2;
+        
+        iconEl.style.transform = `translate(${x - offsetX}px, ${y - offsetY}px)`;
       });
+      
+      animationRef.current = requestAnimationFrame(animate);
     };
     
-    document.addEventListener('mousemove', handleMouseMove);
+    // Start animation
+    animationRef.current = requestAnimationFrame(animate);
     
+    // Cleanup
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
     };
   }, []);
 
@@ -66,7 +120,7 @@ const Hero: React.FC = () => {
           </div>
           
           <div className="w-full lg:w-1/2 mt-12 lg:mt-0" ref={iconRef}>
-            <div className="relative w-full aspect-square max-w-md mx-auto">
+            <div className="relative w-full aspect-square max-w-md mx-auto circle-container">
               {/* Main graphic */}
               <motion.div 
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -88,12 +142,12 @@ const Hero: React.FC = () => {
                 </div>
               </motion.div>
               
-              {/* Floating icons */}
+              {/* Floating icons - removed fixed positioning classes as they'll be positioned by JS */}
               <motion.div 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, delay: 0.5 }}
-                className="floating-icon absolute top-0 left-10 w-14 h-14 bg-blue-900/30 backdrop-blur-md rounded-lg flex items-center justify-center border border-blue-700/50 shadow-lg"
+                className="floating-icon w-14 h-14 bg-blue-900/30 backdrop-blur-md rounded-lg flex items-center justify-center border border-blue-700/50 shadow-lg absolute"
                 data-speed="2"
               >
                 <Brain className="text-blue-400 h-8 w-8" />
@@ -103,7 +157,7 @@ const Hero: React.FC = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, delay: 0.7 }}
-                className="floating-icon absolute top-1/4 right-0 w-16 h-16 bg-purple-900/30 backdrop-blur-md rounded-lg flex items-center justify-center border border-purple-700/50 shadow-lg"
+                className="floating-icon w-16 h-16 bg-purple-900/30 backdrop-blur-md rounded-lg flex items-center justify-center border border-purple-700/50 shadow-lg absolute"
                 data-speed="4"
               >
                 <Cloud className="text-purple-400 h-9 w-9" />
@@ -113,7 +167,7 @@ const Hero: React.FC = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, delay: 0.9 }}
-                className="floating-icon absolute bottom-1/4 left-0 w-14 h-14 bg-green-900/30 backdrop-blur-md rounded-lg flex items-center justify-center border border-green-700/50 shadow-lg"
+                className="floating-icon w-14 h-14 bg-green-900/30 backdrop-blur-md rounded-lg flex items-center justify-center border border-green-700/50 shadow-lg absolute"
                 data-speed="3"
               >
                 <Database className="text-green-400 h-8 w-8" />
@@ -123,7 +177,7 @@ const Hero: React.FC = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, delay: 1.1 }}
-                className="floating-icon absolute bottom-0 right-10 w-14 h-14 bg-yellow-900/30 backdrop-blur-md rounded-lg flex items-center justify-center border border-yellow-700/50 shadow-lg"
+                className="floating-icon w-14 h-14 bg-yellow-900/30 backdrop-blur-md rounded-lg flex items-center justify-center border border-yellow-700/50 shadow-lg absolute"
                 data-speed="2.5"
               >
                 <Code className="text-yellow-400 h-8 w-8" />
@@ -133,7 +187,7 @@ const Hero: React.FC = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, delay: 1.3 }}
-                className="floating-icon absolute bottom-1/3 right-1/3 w-12 h-12 bg-pink-900/30 backdrop-blur-md rounded-lg flex items-center justify-center border border-pink-700/50 shadow-lg"
+                className="floating-icon w-12 h-12 bg-pink-900/30 backdrop-blur-md rounded-lg flex items-center justify-center border border-pink-700/50 shadow-lg absolute"
                 data-speed="3.5"
               >
                 <Shield className="text-pink-400 h-7 w-7" />
