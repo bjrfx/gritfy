@@ -19,11 +19,34 @@ import {
 const Hero: React.FC = () => {
   const iconRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number | null>(null);
+  const mousePosition = useRef<{x: number, y: number} | null>(null);
 
   useEffect(() => {
     // Initialize positions and start the animation
     const container = iconRef.current;
     if (!container) return;
+    
+    // Setup mouse move listener for repel effect
+    const handleMouseMove = (e: MouseEvent) => {
+      const containerRect = container.querySelector('.circle-container')?.getBoundingClientRect();
+      if (!containerRect) return;
+      
+      // Calculate mouse position relative to the container
+      mousePosition.current = {
+        x: e.clientX - containerRect.left,
+        y: e.clientY - containerRect.top
+      };
+    };
+    
+    // Add mouse move listener
+    container.addEventListener('mousemove', handleMouseMove);
+    
+    // Reset mouse position when mouse leaves the container
+    const handleMouseLeave = () => {
+      mousePosition.current = null;
+    };
+    
+    container.addEventListener('mouseleave', handleMouseLeave);
     
     const containerRect = container.querySelector('.circle-container')?.getBoundingClientRect();
     if (!containerRect) return;
@@ -71,8 +94,38 @@ const Hero: React.FC = () => {
         const waveX = Math.sin(time * waveFrequency) * waveAmplitude;
         const waveY = Math.cos(time * (waveFrequency * 1.2)) * waveAmplitude;
         
-        const x = centerX + Math.cos(angle) * orbitRadius + waveX;
-        const y = centerY + Math.sin(angle) * orbitRadius + waveY;
+        let x = centerX + Math.cos(angle) * orbitRadius + waveX;
+        let y = centerY + Math.sin(angle) * orbitRadius + waveY;
+        
+        // Apply repel effect if mouse is over the container
+        if (mousePosition.current) {
+          // Get icon's current position
+          const iconRect = iconEl.getBoundingClientRect();
+          const iconCenterX = iconRect.width / 2;
+          const iconCenterY = iconRect.height / 2;
+          
+          // Calculate distance between mouse and icon
+          const dx = mousePosition.current.x - (x - iconCenterX);
+          const dy = mousePosition.current.y - (y - iconCenterY);
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          // Apply repel force if mouse is close to the icon
+          const repelThreshold = 100; // Distance at which repel effect starts
+          const repelStrength = 40; // Strength of the repel effect
+          
+          if (distance < repelThreshold) {
+            // Calculate repel force (stronger when closer)
+            const force = (repelThreshold - distance) / repelThreshold * repelStrength;
+            
+            // Normalize direction vector
+            const normalizedDx = dx / distance;
+            const normalizedDy = dy / distance;
+            
+            // Apply repel force in the opposite direction of the mouse
+            x -= normalizedDx * force;
+            y -= normalizedDy * force;
+          }
+        }
         
         // Set position while accounting for the icon's size
         const offsetX = iconEl.offsetWidth / 2;
@@ -92,6 +145,9 @@ const Hero: React.FC = () => {
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current);
       }
+      // Remove event listeners
+      container.removeEventListener('mousemove', handleMouseMove);
+      container.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, []);
 
