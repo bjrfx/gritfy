@@ -108,19 +108,19 @@ const Footer: React.FC = () => {
               <li className="flex items-start">
                 <MapPin className="w-5 h-5 text-gray-400 mr-2 mt-0.5" />
                 <span className="text-gray-400">
-                  1234 Tech Boulevard, San Francisco, CA 94107, USA
+                  London, On, Canada.
                 </span>
               </li>
               <li className="flex items-center">
                 <Phone className="w-5 h-5 text-gray-400 mr-2" />
-                <a href="tel:+14155552671" className="text-gray-400 hover:text-white transition-colors">
-                  +1 (415) 555-2671
+                <a href="tel:+14373761965" className="text-gray-400 hover:text-white transition-colors">
+                  +1 (437) 376-1965
                 </a>
               </li>
               <li className="flex items-center">
                 <Mail className="w-5 h-5 text-gray-400 mr-2" />
-                <a href="mailto:info@gritfytechnologies.com" className="text-gray-400 hover:text-white transition-colors">
-                  info@gritfytechnologies.com
+                <a href="mailto:contact@gritfytechnologies.com" className="text-gray-400 hover:text-white transition-colors">
+                  contact@gritfytechnologies.com
                 </a>
               </li>
             </ul>

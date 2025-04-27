@@ -45,19 +45,19 @@ const Contact: React.FC = () => {
     {
       icon: <Mail className="w-6 h-6 text-primary-400" />,
       title: "Email Us",
-      details: "info@gritfytechnologies.com",
+      details: "Click to send us an email",
       action: "mailto:info@gritfytechnologies.com",
     },
     {
       icon: <Phone className="w-6 h-6 text-primary-400" />,
       title: "Call Us",
-      details: "+1 (415) 555-2671",
-      action: "tel:+14155552671",
+      details: "+1 (437) 376-1965",
+      action: "tel:+14373761965",
     },
     {
       icon: <MapPin className="w-6 h-6 text-primary-400" />,
       title: "Visit Us",
-      details: "1234 Tech Boulevard, San Francisco, CA 94107",
+      details: "London, On, Canada.",
       action: "https://maps.google.com",
     },
     {
@@ -108,13 +108,13 @@ const Contact: React.FC = () => {
                     <div className="flex-shrink-0 mt-1">
                       {item.icon}
                     </div>
-                    <div className="ml-4">
+                    <div className="ml-4 overflow-hidden">
                       <h3 className="font-semibold text-white mb-1">{item.title}</h3>
-                      <p className="text-gray-400">
+                      <p className="text-gray-400 break-words" >
                         {item.action ? (
                           <a 
                             href={item.action} 
-                            className="hover:text-primary-400 transition-colors"
+                            className="hover:text-primary-400 transition-colors break-all"
                             target={item.action.startsWith('http') ? "_blank" : undefined}
                             rel={item.action.startsWith('http') ? "noopener noreferrer" : undefined}
                           >
@@ -194,7 +194,7 @@ const Contact: React.FC = () => {
               ) : (
                 <form onSubmit={handleSubmit}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <div>
+                    <div className="w-full">
                       <label className="block text-sm font-medium text-gray-300 mb-2" htmlFor="name">
                         Full Name *
                       </label>
@@ -209,7 +209,7 @@ const Contact: React.FC = () => {
                         placeholder="John Doe"
                       />
                     </div>
-                    <div>
+                    <div className="w-full overflow-hidden">
                       <label className="block text-sm font-medium text-gray-300 mb-2" htmlFor="email">
                         Email Address *
                       </label>
