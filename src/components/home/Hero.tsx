@@ -17,11 +17,12 @@ import {
 } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
+import Particles from '../animations/Particles';
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
 
 const Hero: React.FC = () => {
+  const [showParticles, setShowParticles] = useState(true);
   const iconRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number | null>(null);
   const mousePosition = useRef<{x: number, y: number} | null>(null);
@@ -237,9 +238,10 @@ const Hero: React.FC = () => {
       container.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, []);
-
   return (
+    // Particles
     <section ref={heroRef} className="relative pt-24 pb-20 md:pt-36 md:pb-32 overflow-hidden hero-section">
+      {showParticles && <Particles />}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col lg:flex-row items-center">
           <div ref={contentRef} className="w-full lg:w-1/2 lg:pr-12">
