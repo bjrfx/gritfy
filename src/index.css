@@ -166,12 +166,21 @@
   cursor: pointer;
 }
 
-.scroll-indicator.visible {
-  opacity: 1;
+/* Infinite services scroll styles */
+.services-track {
+  display: flex;
+  gap: 1.5rem;
+  will-change: transform;
+  padding-bottom: 1rem;
 }
 
-.scroll-indicator:hover {
-  background: rgba(99, 102, 241, 0.6);
+.service-card {
+  transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  z-index: 2;
 }
 
 /* React-like orbital rings for the logo */

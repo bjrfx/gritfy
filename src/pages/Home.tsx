@@ -1,13 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Hero from '../components/home/Hero';
 import EnhancedServices from '../components/home/EnhancedServices';
 import CTA from '../components/home/CTA';
-import { motion, useAnimation } from 'framer-motion';
+import { useAnimation } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { Clock, Award, Users, Zap } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+import InfiniteServicesScroll from '../components/home/InfiniteServicesScroll';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
@@ -128,6 +129,7 @@ const Home: React.FC = () => {
     <>
       <Hero />
       <EnhancedServices />
+      <InfiniteServicesScroll />
       
       <section ref={statsRef} className="py-16 md:py-24 bg-slate-950/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
