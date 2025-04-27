@@ -48,8 +48,15 @@ export default {
         },
       },
       animation: {
+        blink: 'blink 1s step-end infinite',
         'float': 'float 10s ease-in-out infinite',
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      },
+      keyframes: {
+        blink: {
+          '0%, 100%': { opacity: 1 },
+          '50%': { opacity: 0 },
+        },
       },
       backdropBlur: {
         xs: '2px',

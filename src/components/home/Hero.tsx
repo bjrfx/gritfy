@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
@@ -162,8 +162,7 @@ const Hero: React.FC = () => {
               transition={{ duration: 0.6 }}
             >
               <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
-                <span className="gradient-text">Transform</span> Your Business with 
-                <span className="gradient-text"> Enterprise Technology</span>
+                <TypewriterText />
               </h1>
               <p className="text-gray-300 text-lg md:text-xl mb-8 max-w-xl">
                 Cutting-edge AI solutions, cloud services, and digital transformation 
@@ -327,6 +326,100 @@ const Hero: React.FC = () => {
         </div>
       </div>
     </section>
+  );
+};
+
+// TypewriterText component for animated text effect
+const TypewriterText: React.FC = () => {
+  // Array of phrases to cycle through
+  const phrases = [
+    "Transform Your Business with Enterprise Technology",
+    "Accelerate Growth with AI-Powered Solutions",
+    "Innovate Faster with Cloud Technologies",
+    "Scale Securely with Enterprise Architecture",
+    "Optimize Operations with Digital Transformation"
+  ];
+  
+  // State variables for the animation
+  const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
+  const [currentText, setCurrentText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [typingSpeed, setTypingSpeed] = useState(80); // Base typing speed in ms
+  
+  useEffect(() => {
+    // Get the current phrase
+    const currentPhrase = phrases[currentPhraseIndex];
+    
+    // Set the typing speed based on the current action
+    if (isDeleting) {
+      setTypingSpeed(100); // Faster when deleting
+    } else if (currentText === currentPhrase) {
+      // Pause at the end of typing a complete phrase
+      setTypingSpeed(2000); // Pause for 2 seconds
+    } else {
+      setTypingSpeed(100); // Normal typing speed
+    }
+    
+    // Handle the typing/deleting animation
+    const timeout = setTimeout(() => {
+      if (!isDeleting) {
+        // Typing forward
+        if (currentText !== currentPhrase) {
+          setCurrentText(currentPhrase.substring(0, currentText.length + 1));
+        } else {
+          // Start deleting after the pause
+          setIsDeleting(true);
+        }
+      } else {
+        // Deleting
+        if (currentText !== "") {
+          setCurrentText(currentText.substring(0, currentText.length - 1));
+        } else {
+          // Move to the next phrase after deletion is complete
+          setIsDeleting(false);
+          setCurrentPhraseIndex((prevIndex) => (prevIndex + 1) % phrases.length);
+        }
+      }
+    }, typingSpeed);
+    
+    // Cleanup timeout on unmount or state change
+    return () => clearTimeout(timeout);
+  }, [currentText, isDeleting, currentPhraseIndex, phrases, typingSpeed]);
+  
+  // Split the current text to apply gradient styling
+  const formatText = () => {
+    // For the first phrase
+    if (currentPhraseIndex === 0) {
+      const parts = currentText.split("with");
+      if (parts.length > 1) {
+        return (
+          <>
+            <span className="gradient-text">Transform</span>
+            {parts[0].substring(9)} 
+            with
+            <span className="gradient-text">{parts[1]}</span>
+          </>
+        );
+      }
+      return currentText;
+    }
+    
+    // For other phrases, highlight key terms
+    const words = currentText.split(" ");
+    return words.map((word, index) => {
+      // Apply gradient to important words
+      if (["Accelerate", "Growth", "AI-Powered", "Innovate", "Faster", "Cloud", "Scale", "Securely", "Enterprise", "Optimize", "Digital"].includes(word)) {
+        return <span key={index} className="gradient-text">{word} </span>;
+      }
+      return <span key={index}>{word} </span>;
+    });
+  };
+  
+  return (
+    <div className="min-h-[120px] md:min-h-[150px]">
+      {formatText()}
+      <span className="inline-block w-[2px] h-[1em] bg-white ml-1 animate-blink"></span>
+    </div>
   );
 };
 
