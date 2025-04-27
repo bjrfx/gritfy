@@ -202,12 +202,18 @@ const Navbar: React.FC = () => {
             </div>
           </div>
           
+          {/* Enhanced mobile menu button with improved visibility */}
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-300 hover:text-white p-2"
+              className="text-white hover:text-white p-2 bg-slate-800/70 hover:bg-slate-700/80 rounded-md transition-colors"
+              aria-expanded={isOpen}
+              aria-label="Toggle menu"
             >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isOpen ? 
+                <X className="h-6 w-6" /> : 
+                <Menu className="h-6 w-6" />
+              }
             </button>
           </div>
         </div>

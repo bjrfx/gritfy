@@ -123,3 +123,53 @@
   @apply shadow-lg;
   box-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
 }
+
+/* GSAP Animation Classes */
+.gsap-reveal {
+  visibility: hidden;
+}
+
+.feature-item {
+  transition: transform 0.3s ease;
+}
+
+.feature-item:hover {
+  transform: translateY(-5px);
+}
+
+/* Animation for stats floating boxes */
+.success-stat, .support-stat {
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+
+.success-stat:hover, .support-stat:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(99, 102, 241, 0.6);
+}
+
+/* Scroll indicator animation */
+.scroll-indicator {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 40px;
+  height: 40px;
+  background: rgba(99, 102, 241, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease, background 0.3s ease;
+  backdrop-filter: blur(4px);
+  z-index: 50;
+  cursor: pointer;
+}
+
+.scroll-indicator.visible {
+  opacity: 1;
+}
+
+.scroll-indicator:hover {
+  background: rgba(99, 102, 241, 0.6);
+}

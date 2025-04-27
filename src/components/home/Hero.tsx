@@ -15,11 +15,98 @@ import {
   Server,
   Lock
 } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger);
 
 const Hero: React.FC = () => {
   const iconRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number | null>(null);
   const mousePosition = useRef<{x: number, y: number} | null>(null);
+  const heroRef = useRef<HTMLElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const paragraphRef = useRef<HTMLParagraphElement>(null);
+  const buttonsRef = useRef<HTMLDivElement>(null);
+  const circleContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // GSAP ScrollTrigger animations
+    const ctx = gsap.context(() => {
+      // Parallax effect for the hero section
+      gsap.to(heroRef.current, {
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        },
+        backgroundPosition: '0 50%',
+        ease: 'none',
+      });
+
+      // Text content animation on scroll
+      const heroTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: heroRef.current,
+          start: 'top 10%',
+          end: '25% top',
+          scrub: true,
+          toggleActions: 'play none none reverse',
+        }
+      });
+
+      heroTl
+        .to(headingRef.current, {
+          y: -50,
+          opacity: 0.5,
+          duration: 1,
+        }, 0)
+        .to(paragraphRef.current, {
+          y: -30,
+          opacity: 0.5,
+          duration: 1,
+        }, 0.1)
+        .to(buttonsRef.current, {
+          y: -20,
+          opacity: 0.5,
+          duration: 1,
+        }, 0.2);
+
+      // Create a reveal animation for the circle container
+      gsap.from(circleContainerRef.current, {
+        scrollTrigger: {
+          trigger: circleContainerRef.current,
+          start: 'top 80%',
+          toggleActions: 'play none none reverse',
+        },
+        scale: 0.8,
+        opacity: 0,
+        duration: 1,
+        ease: 'power2.out',
+      });
+      
+      // Animate floating icons when they scroll into view
+      const floatingIcons = gsap.utils.toArray('.floating-icon');
+      floatingIcons.forEach((icon: any) => {
+        gsap.from(icon, {
+          scrollTrigger: {
+            trigger: icon,
+            start: 'top 90%',
+            toggleActions: 'play none none reverse',
+          },
+          scale: 0,
+          opacity: 0,
+          duration: 0.6,
+          ease: 'back.out(1.5)',
+        });
+      });
+    });
+
+    return () => ctx.revert(); // Cleanup
+  }, []);
 
   useEffect(() => {
     // Initialize positions and start the animation
@@ -152,43 +239,39 @@ const Hero: React.FC = () => {
   }, []);
 
   return (
-    <section className="relative pt-24 pb-20 md:pt-36 md:pb-32 overflow-hidden">
+    <section ref={heroRef} className="relative pt-24 pb-20 md:pt-36 md:pb-32 overflow-hidden hero-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex flex-col lg:flex-row items-center">
-          <div className="w-full lg:w-1/2 lg:pr-12">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
-                <TypewriterText />
-              </h1>
-              <p className="text-gray-300 text-lg md:text-xl mb-8 max-w-xl">
-                Cutting-edge AI solutions, cloud services, and digital transformation 
-                expertise to drive your business forward in the digital age.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mb-8">
-                <Link to="/contact" className="btn btn-primary">
-                  Get Started
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Link>
-                <Link to="/services/enterprise-ai" className="btn btn-outline">
-                  Explore Solutions
-                </Link>
-              </div>
-              
-              {/* <div className="flex items-center space-x-8 mt-12">
-                <img src="https://images.pexels.com/photos/11035481/pexels-photo-11035481.jpeg?auto=compress&cs=tinysrgb&w=100" alt="Company 1" className="h-10 opacity-70 grayscale hover:grayscale-0 hover:opacity-100 transition-all" />
-                <img src="https://images.pexels.com/photos/11035471/pexels-photo-11035471.jpeg?auto=compress&cs=tinysrgb&w=100" alt="Company 2" className="h-10 opacity-70 grayscale hover:grayscale-0 hover:opacity-100 transition-all" />
-                <img src="https://images.pexels.com/photos/11035380/pexels-photo-11035380.jpeg?auto=compress&cs=tinysrgb&w=100" alt="Company 3" className="h-10 opacity-70 grayscale hover:grayscale-0 hover:opacity-100 transition-all" />
-              </div> */}
-            </motion.div>
+          <div ref={contentRef} className="w-full lg:w-1/2 lg:pr-12">
+            <h1 ref={headingRef} className="text-4xl md:text-5xl font-bold leading-tight mb-6">
+              <TypewriterText />
+            </h1>
+            <p ref={paragraphRef} className="text-gray-300 text-lg md:text-xl mb-8 max-w-xl">
+              Cutting-edge AI solutions, cloud services, and digital transformation 
+              expertise to drive your business forward in the digital age.
+            </p>
+            
+            <div ref={buttonsRef} className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mb-8">
+              <Link to="/contact" className="btn btn-primary">
+                Get Started
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Link>
+              <Link to="/services/enterprise-ai" className="btn btn-outline">
+                Explore Solutions
+              </Link>
+            </div>
+            
+            {/* Mobile scroll down indicator - only visible on mobile */}
+            <div className="lg:hidden flex flex-col items-center mt-8 mb-6 text-gray-400 animate-bounce">
+              <span className="text-sm mb-1">Scroll Down</span>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M10 3a1 1 0 00-1 1v10.586l-3.293-3.293a1 1 0 00-1.414 1.414l5 5a1 1 0 001.414 0l5-5a1 1 0 00-1.414-1.414L11 14.586V4a1 1 0 00-1-1z" clipRule="evenodd" />
+              </svg>
+            </div>
           </div>
           
           <div className="w-full lg:w-1/2 mt-12 lg:mt-0" ref={iconRef}>
-            <div className="relative w-full aspect-square max-w-md mx-auto circle-container">
+            <div ref={circleContainerRef} className="relative w-full aspect-square max-w-md mx-auto circle-container">
               {/* Main graphic */}
               <motion.div 
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -324,6 +407,14 @@ const Hero: React.FC = () => {
             </div>
           </div>
         </div>
+      </div>
+      
+      {/* Desktop scroll down indicator - only visible on larger screens */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 hidden lg:flex flex-col items-center text-gray-400 animate-bounce">
+        <span className="text-sm mb-1">Scroll Down</span>
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fillRule="evenodd" d="M10 3a1 1 0 00-1 1v10.586l-3.293-3.293a1 1 0 00-1.414 1.414l5 5a1 1 0 001.414 0l5-5a1 1 0 00-1.414-1.414L11 14.586V4a1 1 0 00-1-1z" clipRule="evenodd" />
+        </svg>
       </div>
     </section>
   );
