@@ -23,6 +23,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Hero: React.FC = () => {
   const [showParticles, setShowParticles] = useState(true);
+  const [showGlow, setShowGlow] = useState(true);
   const iconRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number | null>(null);
   const mousePosition = useRef<{x: number, y: number} | null>(null);
@@ -281,12 +282,12 @@ const Hero: React.FC = () => {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-600/20 to-purple-600/20 backdrop-blur-sm border border-gray-700/50 flex items-center justify-center"
                 style={{
-                  boxShadow: `
+                  boxShadow: showGlow ? `
                     0 0 25px 5px rgba(79, 70, 229, 0.3),
                     0 0 50px 10px rgba(124, 58, 237, 0.2),
                     inset 0 0 20px rgba(139, 92, 246, 0.3)
-                  `,
-                  animation: 'pulse 3s infinite alternate'
+                  ` : 'none',
+                  animation: showGlow ? 'pulse 3s infinite alternate' : 'none'
                 }}
               >
                 <div className="text-center">
