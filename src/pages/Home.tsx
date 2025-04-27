@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Hero from '../components/home/Hero';
-import Services from '../components/home/Services';
+// import Services from '../components/home/Services';
+import EnhancedServices from '../components/home/EnhancedServices';
 import CTA from '../components/home/CTA';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'framer-motion';
@@ -59,7 +60,8 @@ const Home: React.FC = () => {
   return (
     <>
       <Hero />
-      <Services />
+      {/* <Services /> */}
+      <EnhancedServices />
       
       <section className="py-16 md:py-24 bg-slate-950/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
