@@ -7,10 +7,12 @@ import Blog from './pages/Blog';
 import ServiceOverview from './pages/services/ServiceOverview';
 import NotFound from './pages/NotFound';
 import CursorEffect from './components/ui/CursorEffect';
+import ScrollToTop from './components/ui/ScrollToTop';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <CursorEffect />
       <Layout>
         <Routes>
