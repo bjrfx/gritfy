@@ -13,7 +13,8 @@ import {
   Globe,
   LineChart,
   Server,
-  Lock
+  Lock,
+  Zap
 } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -24,6 +25,7 @@ gsap.registerPlugin(ScrollTrigger);
 const Hero: React.FC = () => {
   const [showParticles, setShowParticles] = useState(true);
   const [showGlow, setShowGlow] = useState(true);
+  const [showIcons, setShowIcons] = useState(false);
   const iconRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number | null>(null);
   const mousePosition = useRef<{x: number, y: number} | null>(null);
@@ -275,138 +277,224 @@ const Hero: React.FC = () => {
           
           <div className="w-full lg:w-1/2 mt-12 lg:mt-0" ref={iconRef}>
             <div ref={circleContainerRef} className="relative w-full aspect-square max-w-md mx-auto circle-container">
-              {/* Main graphic */}
+              {/* Main graphic - replacing circle and text with lightning logo */}
               <motion.div 
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-600/20 to-purple-600/20 backdrop-blur-sm border border-gray-700/50 flex items-center justify-center"
-                style={{
-                  boxShadow: showGlow ? `
-                    0 0 25px 5px rgba(79, 70, 229, 0.3),
-                    0 0 50px 10px rgba(124, 58, 237, 0.2),
-                    inset 0 0 20px rgba(139, 92, 246, 0.3)
-                  ` : 'none',
-                  animation: showGlow ? 'pulse 3s infinite alternate' : 'none'
-                }}
+                className="absolute inset-0 rounded-full flex items-center justify-center"
               >
-                <div className="text-center">
-                  <div className="text-5xl font-bold gradient-text mb-2">Gritfy Technologies</div>
-                  <div className="text-gray-400">Enterprise Solutions</div>
+                <div className="relative w-48 h-48 transform-gpu">
+                  {/* Enhanced 3D container with stronger perspective */}
+                  <div className="absolute inset-0 perspective-[1500px]">
+                    {/* 3D rotating container */}
+                    <div 
+                      className="absolute inset-0 transform-gpu transition-all duration-[1200ms] ease-out hover:rotate-y-[20deg] hover:rotate-x-[20deg] group"
+                      style={{ transformStyle: 'preserve-3d' }}
+                    >
+                      {/* Back glow layer (furthest back in z-space) */}
+                      {showGlow && (
+                        <div 
+                          className="absolute inset-6 rounded-full bg-blue-500/30 blur-xl" 
+                          style={{ transform: 'translateZ(-40px)' }}
+                        ></div>
+                      )}
+                      
+                      {/* Middle glow layers for depth */}
+                      {showGlow && (
+                        <div 
+                          className="absolute inset-2 rounded-full bg-gradient-to-br from-blue-500/40 to-purple-600/40 blur-md animate-pulse-slow" 
+                          style={{ transform: 'translateZ(-20px)' }}
+                        ></div>
+                      )}
+                      
+                      {/* Lightning icon base - dark backing for contrast */}
+                      <div 
+                        className="absolute inset-0 rounded-full bg-gray-900 flex items-center justify-center"
+                        style={{ transform: 'translateZ(-5px)' }}
+                      ></div>
+                      
+                      {/* Main circular background with gradient */}
+                      <div 
+                        className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-600 to-purple-700 flex items-center justify-center shadow-xl" 
+                        style={{ transform: 'translateZ(0px)', transformStyle: 'preserve-3d' }}
+                      >
+                        {/* Lightning icon */}
+                        <div style={{ transform: 'translateZ(20px)' }}>
+                          <Zap className="w-24 h-24 text-white drop-shadow-2xl" />
+                        </div>
+                      </div>
+                      
+                      {/* Edge highlight for rim lighting effect */}
+                      <div 
+                        className="absolute inset-[-1px] rounded-full border-t-2 border-l-2 border-white/20" 
+                        style={{ transform: 'translateZ(1px)' }}
+                      ></div>
+                      
+                      {/* Front reflective highlight */}
+                      <div 
+                        className="absolute inset-0 rounded-full overflow-hidden" 
+                        style={{ transform: 'translateZ(2px)' }}
+                      >
+                        <div 
+                          className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] bg-gradient-to-br from-white/40 via-white/10 to-transparent opacity-60 group-hover:opacity-80 transition-opacity"
+                          style={{ transform: 'rotate(-40deg)', transformOrigin: 'bottom right' }}
+                        ></div>
+                      </div>
+                      
+                      {/* Interactive floating particles */}
+                      {showGlow && (
+                        <>
+                          <div className="absolute w-3 h-3 rounded-full bg-blue-400/80 blur-[1px]"
+                               style={{ 
+                                 transform: 'translateZ(30px) translate(20px, -15px)', 
+                                 animation: 'float 6s ease-in-out infinite' 
+                               }}></div>
+                          <div className="absolute w-2 h-2 rounded-full bg-purple-400/80 blur-[1px]"
+                               style={{ 
+                                 transform: 'translateZ(40px) translate(-18px, 22px)', 
+                                 animation: 'float 8s ease-in-out infinite 1s' 
+                               }}></div>
+                          <div className="absolute w-4 h-4 rounded-full bg-indigo-400/80 blur-[2px]"
+                               style={{ 
+                                 transform: 'translateZ(25px) translate(10px, 25px)', 
+                                 animation: 'float 7s ease-in-out infinite 0.5s' 
+                               }}></div>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                  
+                  {/* Animated orbital rings */}
+                  {showGlow && (
+                    <>
+                      {/* Regular circular rings */}
+                      {/* ...existing code... */}
+                      
+                      {/* React-style elliptical orbital rings */}
+                      <div className="react-orbit react-orbit-1"></div>
+                      <div className="react-orbit react-orbit-2"></div>
+                      <div className="react-orbit react-orbit-3"></div>
+                    </>
+                  )}
                 </div>
               </motion.div>
               
               {/* Existing floating icons */}
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: 0.5 }}
-                className="floating-icon w-14 h-14 bg-blue-900/30 backdrop-blur-md rounded-lg flex items-center justify-center border border-blue-700/50 shadow-lg absolute"
-                data-speed="2"
-              >
-                <Brain className="text-blue-400 h-8 w-8" />
-              </motion.div>
-              
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: 0.7 }}
-                className="floating-icon w-16 h-16 bg-purple-900/30 backdrop-blur-md rounded-lg flex items-center justify-center border border-purple-700/50 shadow-lg absolute"
-                data-speed="4"
-              >
-                <Cloud className="text-purple-400 h-9 w-9" />
-              </motion.div>
-              
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: 0.9 }}
-                className="floating-icon w-14 h-14 bg-green-900/30 backdrop-blur-md rounded-lg flex items-center justify-center border border-green-700/50 shadow-lg absolute"
-                data-speed="3"
-              >
-                <Database className="text-green-400 h-8 w-8" />
-              </motion.div>
-              
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: 1.1 }}
-                className="floating-icon w-14 h-14 bg-yellow-900/30 backdrop-blur-md rounded-lg flex items-center justify-center border border-yellow-700/50 shadow-lg absolute"
-                data-speed="2.5"
-              >
-                <Code className="text-yellow-400 h-8 w-8" />
-              </motion.div>
-              
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: 1.3 }}
-                className="floating-icon w-12 h-12 bg-pink-900/30 backdrop-blur-md rounded-lg flex items-center justify-center border border-pink-700/50 shadow-lg absolute"
-                data-speed="3.5"
-              >
-                <Shield className="text-pink-400 h-7 w-7" />
-              </motion.div>
-              
-              {/* Additional floating icons */}
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: 1.5 }}
-                className="floating-icon w-13 h-13 bg-red-900/30 backdrop-blur-md rounded-lg flex items-center justify-center border border-red-700/50 shadow-lg absolute"
-                data-speed="2.2"
-              >
-                <Cpu className="text-red-400 h-7 w-7" />
-              </motion.div>
-              
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: 1.7 }}
-                className="floating-icon w-15 h-15 bg-cyan-900/30 backdrop-blur-md rounded-lg flex items-center justify-center border border-cyan-700/50 shadow-lg absolute"
-                data-speed="3.2"
-              >
-                <Network className="text-cyan-400 h-8 w-8" />
-              </motion.div>
-              
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: 1.9 }}
-                className="floating-icon w-13 h-13 bg-emerald-900/30 backdrop-blur-md rounded-lg flex items-center justify-center border border-emerald-700/50 shadow-lg absolute"
-                data-speed="2.7"
-              >
-                <Globe className="text-emerald-400 h-7 w-7" />
-              </motion.div>
-              
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: 2.1 }}
-                className="floating-icon w-12 h-12 bg-orange-900/30 backdrop-blur-md rounded-lg flex items-center justify-center border border-orange-700/50 shadow-lg absolute"
-                data-speed="1.8"
-              >
-                <LineChart className="text-orange-400 h-7 w-7" />
-              </motion.div>
-              
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: 2.3 }}
-                className="floating-icon w-14 h-14 bg-indigo-900/30 backdrop-blur-md rounded-lg flex items-center justify-center border border-indigo-700/50 shadow-lg absolute"
-                data-speed="2.9"
-              >
-                <Server className="text-indigo-400 h-8 w-8" />
-              </motion.div>
-              
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: 2.5 }}
-                className="floating-icon w-11 h-11 bg-teal-900/30 backdrop-blur-md rounded-lg flex items-center justify-center border border-teal-700/50 shadow-lg absolute"
-                data-speed="3.8"
-              >
-                <Lock className="text-teal-400 h-6 w-6" />
-              </motion.div>
+              {showIcons && (
+                <>
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1, delay: 0.5 }}
+                  className="floating-icon w-14 h-14 bg-blue-900/30 backdrop-blur-md rounded-lg flex items-center justify-center border border-blue-700/50 shadow-lg absolute"
+                  data-speed="2"
+                >
+                  <Brain className="text-blue-400 h-8 w-8" />
+                </motion.div>
+                
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1, delay: 0.7 }}
+                  className="floating-icon w-16 h-16 bg-purple-900/30 backdrop-blur-md rounded-lg flex items-center justifyCenter border border-purple-700/50 shadow-lg absolute"
+                  data-speed="4"
+                >
+                  <Cloud className="text-purple-400 h-9 w-9" />
+                </motion.div>
+                
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1, delay: 0.9 }}
+                  className="floating-icon w-14 h-14 bg-green-900/30 backdrop-blur-md rounded-lg flex items-center justifyCenter border border-green-700/50 shadow-lg absolute"
+                  data-speed="3"
+                >
+                  <Database className="text-green-400 h-8 w-8" />
+                </motion.div>
+                
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1, delay: 1.1 }}
+                  className="floating-icon w-14 h-14 bg-yellow-900/30 backdrop-blur-md rounded-lg flex items-center justifyCenter border border-yellow-700/50 shadow-lg absolute"
+                  data-speed="2.5"
+                >
+                  <Code className="text-yellow-400 h-8 w-8" />
+                </motion.div>
+                
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1, delay: 1.3 }}
+                  className="floating-icon w-12 h-12 bg-pink-900/30 backdrop-blur-md rounded-lg flex items-center justifyCenter border border-pink-700/50 shadow-lg absolute"
+                  data-speed="3.5"
+                >
+                  <Shield className="text-pink-400 h-7 w-7" />
+                </motion.div>
+                
+                {/* Additional floating icons */}
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1, delay: 1.5 }}
+                  className="floating-icon w-13 h-13 bg-red-900/30 backdrop-blur-md rounded-lg flex items-center justifyCenter border border-red-700/50 shadow-lg absolute"
+                  data-speed="2.2"
+                >
+                  <Cpu className="text-red-400 h-7 w-7" />
+                </motion.div>
+                
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1, delay: 1.7 }}
+                  className="floating-icon w-15 h-15 bg-cyan-900/30 backdrop-blur-md rounded-lg flex items-center justifyCenter border border-cyan-700/50 shadow-lg absolute"
+                  data-speed="3.2"
+                >
+                  <Network className="text-cyan-400 h-8 w-8" />
+                </motion.div>
+                
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1, delay: 1.9 }}
+                  className="floating-icon w-13 h-13 bg-emerald-900/30 backdrop-blur-md rounded-lg flex items-center justifyCenter border border-emerald-700/50 shadow-lg absolute"
+                  data-speed="2.7"
+                >
+                  <Globe className="text-emerald-400 h-7 w-7" />
+                </motion.div>
+                
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1, delay: 2.1 }}
+                  className="floating-icon w-12 h-12 bg-orange-900/30 backdrop-blur-md rounded-lg flex items-center justifyCenter border border-orange-700/50 shadow-lg absolute"
+                  data-speed="1.8"
+                >
+                  <LineChart className="text-orange-400 h-7 w-7" />
+                </motion.div>
+                
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1, delay: 2.3 }}
+                  className="floating-icon w-14 h-14 bg-indigo-900/30 backdrop-blur-md rounded-lg flex items-center justifyCenter border border-indigo-700/50 shadow-lg absolute"
+                  data-speed="2.9"
+                >
+                  <Server className="text-indigo-400 h-8 w-8" />
+                </motion.div>
+                
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1, delay: 2.5 }}
+                  className="floating-icon w-11 h-11 bg-teal-900/30 backdrop-blur-md rounded-lg flex items-center justifyCenter border border-teal-700/50 shadow-lg absolute"
+                  data-speed="3.8"
+                >
+                  <Lock className="text-teal-400 h-6 w-6" />
+                </motion.div>
+                </>
+              )}
             </div>
           </div>
         </div>

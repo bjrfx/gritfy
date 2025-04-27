@@ -173,3 +173,51 @@
 .scroll-indicator:hover {
   background: rgba(99, 102, 241, 0.6);
 }
+
+/* React-like orbital rings for the logo */
+.react-orbit {
+  position: absolute;
+  border-radius: 50%;
+  border: 4px solid rgba(97, 218, 251, 0.3); /* Increased thickness from 2px to 4px and opacity */
+  width: calc(100% + 5rem);
+  height: calc(100% + 5rem);
+  left: -2.5rem;
+  top: -2.5rem;
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  pointer-events: none; /* Ensures rings don't interfere with interactions */
+}
+
+.react-orbit-1 {
+  transform: rotateX(70deg) rotateZ(0deg);
+  animation: reactOrbit1 10s linear infinite;
+}
+
+.react-orbit-2 {
+  transform: rotateX(60deg) rotateY(60deg) rotateZ(0deg);
+  border-color: rgba(97, 218, 251, 0.25); /* Increased opacity */
+  border-width: 3px; /* Slightly different thickness for visual interest */
+  animation: reactOrbit2 15s linear infinite reverse;
+}
+
+.react-orbit-3 {
+  transform: rotateX(65deg) rotateY(-45deg) rotateZ(0deg);
+  border-color: rgba(97, 218, 251, 0.2); /* Increased opacity */
+  border-width: 5px; /* Even thicker border */
+  animation: reactOrbit3 20s linear infinite;
+}
+
+@keyframes reactOrbit1 {
+  0% { transform: rotateX(70deg) rotateZ(0deg); }
+  100% { transform: rotateX(70deg) rotateZ(360deg); }
+}
+
+@keyframes reactOrbit2 {
+  0% { transform: rotateX(60deg) rotateY(60deg) rotateZ(0deg); }
+  100% { transform: rotateX(60deg) rotateY(60deg) rotateZ(360deg); }
+}
+
+@keyframes reactOrbit3 {
+  0% { transform: rotateX(65deg) rotateY(-45deg) rotateZ(0deg); }
+  100% { transform: rotateX(65deg) rotateY(-45deg) rotateZ(360deg); }
+}

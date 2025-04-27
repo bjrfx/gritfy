@@ -29,7 +29,7 @@ export default function Particles({ id = "particles-js", className = "" }: Parti
     
     // Particle properties
     const particlesArray: Particle[] = [];
-    const numberOfParticles = 100;
+    const numberOfParticles = 50;
     const maxSize = 5;
     const minSize = 1;
     const mouseRadius = 100;

@@ -51,6 +51,7 @@ export default {
         blink: 'blink 1s step-end infinite',
         'float': 'float 10s ease-in-out infinite',
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'spin-slow': 'spin 8s linear infinite',
       },
       keyframes: {
         blink: {
@@ -60,6 +61,22 @@ export default {
       },
       backdropBlur: {
         xs: '2px',
+      },
+      perspective: {
+        'none': 'none',
+        '500': '500px',
+        '1000': '1000px',
+      },
+      transformStyle: {
+        'flat': 'flat',
+        '3d': 'preserve-3d',
+      },
+      rotate: {
+        'y-12': 'rotateY(12deg)',
+        'x-12': 'rotateX(12deg)',
+      },
+      translate: {
+        'z-10': 'translateZ(10px)',
       },
     },
   },
