@@ -182,21 +182,21 @@ const Navbar: React.FC = () => {
               </div>
               
               <Link to="/about" className="nav-link flex items-center">
-                <InfoIcon className="w-4 h-4 mr-1" />
+                {/* <InfoIcon className="w-4 h-4 mr-1" /> */}
                 About
               </Link>
               
               <Link to="/contact" className="nav-link flex items-center">
-                <Phone className="w-4 h-4 mr-1" />
+                {/* <Phone className="w-4 h-4 mr-1" /> */}
                 Contact
               </Link>
               
               <Link to="/blog" className="nav-link flex items-center">
-                <BookOpen className="w-4 h-4 mr-1" />
+                {/* <BookOpen className="w-4 h-4 mr-1" /> */}
                 Blog
               </Link>
               
-              <Link to="/contact" className="btn btn-primary ml-4 text-sm flex items-center">
+              <Link to="/contact" className="btn btn-outline ml-4 text-sm flex items-center">
                 Get Started
               </Link>
             </div>
