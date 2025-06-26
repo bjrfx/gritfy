@@ -57,7 +57,7 @@ const Contact: React.FC = () => {
     {
       icon: <MapPin className="w-6 h-6 text-primary-400" />,
       title: "Visit Us",
-      details: "London, On, Canada.",
+      details: "London, ON, Canada.",
       action: "https://maps.google.com",
     },
     {
