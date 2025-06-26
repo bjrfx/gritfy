@@ -63,7 +63,7 @@ const Contact: React.FC = () => {
     {
       icon: <Clock className="w-6 h-6 text-primary-400" />,
       title: "Working Hours",
-      details: "Monday-Friday: 9AM-6PM PST",
+      details: "Monday-Friday: 9AM-6PM EST",
       action: null,
     },
   ];
@@ -134,27 +134,27 @@ const Contact: React.FC = () => {
               <div className="relative z-10">
                 <h3 className="text-xl font-semibold mb-3">Global Presence</h3>
                 <p className="text-gray-400 mb-4">
-                  With offices across North America, Europe, and Asia-Pacific, we provide localized 
+                  With offices across North America and Asia, we provide localized 
                   support backed by global expertise.
                 </p>
                 <div className="grid grid-cols-3 gap-4 text-sm">
                   <div>
                     <h4 className="font-semibold text-white">North America</h4>
-                    <p className="text-gray-400">San Francisco</p>
-                    <p className="text-gray-400">New York</p>
-                    <p className="text-gray-400">Toronto</p>
+                    {/* <p className="text-gray-400">San Francisco</p>
+                    <p className="text-gray-400">New York</p> */}
+                    <p className="text-gray-400">London</p>
                   </div>
-                  <div>
+                  {/* <div>
                     <h4 className="font-semibold text-white">Europe</h4>
                     <p className="text-gray-400">London</p>
                     <p className="text-gray-400">Berlin</p>
                     <p className="text-gray-400">Stockholm</p>
-                  </div>
+                  </div> */}
                   <div>
-                    <h4 className="font-semibold text-white">Asia-Pacific</h4>
-                    <p className="text-gray-400">Singapore</p>
-                    <p className="text-gray-400">Tokyo</p>
-                    <p className="text-gray-400">Sydney</p>
+                    <h4 className="font-semibold text-white">Asia</h4>
+                    <p className="text-gray-400">India</p>
+                    {/* <p className="text-gray-400">Tokyo</p>
+                    <p className="text-gray-400">Sydney</p> */}
                   </div>
                 </div>
               </div>
