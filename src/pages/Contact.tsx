@@ -310,7 +310,7 @@ const Contact: React.FC = () => {
           <div className="aspect-[16/5] rounded-lg overflow-hidden">
             <iframe 
               title="Gritfy Technologies Office Location" 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.6634097818997!2d-122.40069688427677!3d37.78615791969231!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085807c1f0da00d%3A0xfa162356a28d5e2c!2sSan%20Francisco%2C%20CA%2094107!5e0!3m2!1sen!2sus!4v1654523634156!5m2!1sen!2sus" 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d186904.87211065143!2d-81.41342715923388!3d42.94901410695336!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882ef20ea88d9b0b%3A0x28c7d7699a056b95!2sLondon%2C%20ON%2C%20Canada!5e0!3m2!1sen!2sin!4v1750915875151!5m2!1sen!2sin" 
               width="100%" 
               height="100%" 
               style={{ border: 0 }} 
