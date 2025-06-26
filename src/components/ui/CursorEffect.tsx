@@ -5,8 +5,22 @@ const CursorEffect: React.FC = () => {
   const [hidden, setHidden] = useState(true);
   const [clicked, setClicked] = useState(false);
   const [linkHovered, setLinkHovered] = useState(false);
+  const [isMobileDevice, setIsMobileDevice] = useState(false);
 
   useEffect(() => {
+    // Check if the device is mobile using media query
+    const checkIfMobile = () => {
+      const isMobile = window.matchMedia('(max-width: 768px), (pointer: coarse)').matches;
+      setIsMobileDevice(isMobile);
+      return isMobile;
+    };
+
+    // Initial check
+    const isMobile = checkIfMobile();
+
+    // Skip cursor effect setup for mobile devices
+    if (isMobile) return;
+
     // Create and inject a stylesheet specifically for cursor handling
     const styleElement = document.createElement('style');
     styleElement.setAttribute('id', 'cursor-style-overrides');
@@ -54,12 +68,20 @@ const CursorEffect: React.FC = () => {
     // Refresh event listeners periodically
     const intervalId = setInterval(setupHoverListeners, 1000);
 
+    // Listen for window resize events to update device type
+    const handleResize = () => {
+      checkIfMobile();
+    };
+
+    window.addEventListener('resize', handleResize);
+
     return () => {
       window.removeEventListener('mousemove', updatePosition);
       window.removeEventListener('mousedown', handleMouseDown);
       window.removeEventListener('mouseup', handleMouseUp);
       window.removeEventListener('mouseleave', () => setHidden(true));
       window.removeEventListener('mouseenter', () => setHidden(false));
+      window.removeEventListener('resize', handleResize);
       
       clearInterval(intervalId);
       
@@ -75,6 +97,11 @@ const CursorEffect: React.FC = () => {
       });
     };
   }, []);
+
+  // Don't render custom cursor on mobile devices
+  if (isMobileDevice) {
+    return null;
+  }
 
   return (
     <>
