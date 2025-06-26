@@ -151,7 +151,8 @@ const About: React.FC = () => {
             </div>
           </div>
           
-          {/* <div className="mb-24">
+          <div className="mb-24">
+            {/* Leadership Team Section - Commented Out
             <div className="text-center mb-12">
               <h2 className="text-3xl font-bold mb-4">Leadership Team</h2>
               <p className="max-w-2xl mx-auto text-gray-400">
@@ -180,7 +181,8 @@ const About: React.FC = () => {
                   <p className="text-gray-400 text-sm">{member.bio}</p>
                 </motion.div>
               ))}
-            </div> */}
+            </div>
+            */}
           </div>
         </div>
       </section>
