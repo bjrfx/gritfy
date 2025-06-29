@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Clock, Send } from 'lucide-react';
+import { db } from '../firebase/config';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 const Contact: React.FC = () => {
   useEffect(() => {
@@ -17,18 +19,29 @@ const Contact: React.FC = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormState(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitError(null);
     
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      console.log("Attempting to submit form to Firebase...");
+      // Add form data to Firestore
+      const docRef = await addDoc(collection(db, "contactSubmissions"), {
+        ...formState,
+        createdAt: serverTimestamp(),
+      });
+      
+      console.log("Document successfully written with ID:", docRef.id);
+      
+      // Success
       setIsSubmitting(false);
       setIsSubmitted(true);
       setFormState({
@@ -38,7 +51,22 @@ const Contact: React.FC = () => {
         service: '',
         message: '',
       });
-    }, 1500);
+    } catch (error: any) {
+      console.error("Error submitting form:", error);
+      console.error("Error code:", error.code);
+      console.error("Error message:", error.message);
+      
+      setIsSubmitting(false);
+      
+      // Provide more specific error messages based on the Firebase error
+      if (error.code === 'permission-denied') {
+        setSubmitError("You don't have permission to submit this form. Please contact support.");
+      } else if (error.code === 'unavailable') {
+        setSubmitError("We're having trouble reaching our servers. Please check your internet connection and try again.");
+      } else {
+        setSubmitError(`There was an error submitting your message: ${error.message}. Please try again.`);
+      }
+    }
   };
 
   const contactInfo = [
@@ -277,6 +305,12 @@ const Contact: React.FC = () => {
                       placeholder="Tell us about your project or inquiry..."
                     />
                   </div>
+                  
+                  {submitError && (
+                    <div className="mb-6 p-3 rounded-md bg-red-500/20 border border-red-500/50">
+                      <p className="text-red-400">{submitError}</p>
+                    </div>
+                  )}
                   
                   <div>
                     <button

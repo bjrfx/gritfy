@@ -214,7 +214,7 @@ const EnhancedServices: React.FC = () => {
       icon: <Cloud className="w-8 h-8 text-white" />,
       title: "Cloud Services",
       description: "Comprehensive cloud solutions including AWS, Azure, and Google Cloud with expert CI/CD consulting and managed services.",
-      link: "/services/cloud",
+      link: "/services/aws",
       color: "from-purple-600/0 to-purple-600",
       image: "https://images.pexels.com/photos/7988079/pexels-photo-7988079.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     },
@@ -238,7 +238,7 @@ const EnhancedServices: React.FC = () => {
       icon: <Smartphone className="w-8 h-8 text-white" />,
       title: "Digital Transformation",
       description: "Comprehensive digital solutions including blockchain technology, IoT implementation, and cybersecurity services.",
-      link: "/services/digital",
+      link: "/services/blockchain",
       color: "from-red-600/0 to-red-600",
       image: "https://images.pexels.com/photos/3912981/pexels-photo-3912981.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
     }
